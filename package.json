@@ -1,0 +1,26 @@
+{
+	"name": "@geisonjr/json-transfer-protocol",
+	"description": "JTP (JSON Transfer Protocol)",
+	"version": "1.0.0",
+	"private": false,
+	"author": {
+		"name": "GeisonJr",
+		"url": "https://github.com/GeisonJr"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GeisonJr/json-transfer-protocol.git"
+	},
+	"bugs": {
+		"url": "https://github.com/GeisonJr/json-transfer-protocol/issues"
+	},
+	"scripts": {},
+	"dependencies": {
+		"@geisonjr/envfy": "^1.0.1",
+		"@geisonjr/typefy": "^1.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.5.0",
+		"typescript": "^5.3.3"
+	}
+}
