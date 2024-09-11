@@ -1,0 +1,117 @@
+# Nodejs
+node_modules/
+*-debug.log*
+*-error.log*
+*.log
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock
+
+# Docker
+# docker-compose.yaml
+# docker-compose.yml
+# compose.yaml
+# compose.yml
+
+# Builds
+build/
+dist/
+lib/
+out/
+*.aab
+*.apk
+*.dll
+*.exe
+*.gz
+*.ipa
+*.tar
+*.tgz
+*.zip
+
+# IDEs
+.history/
+# .idea/
+# .vscode/
+# *.sublime-project
+# *.sublime-workspace
+
+# Project
+.expo/
+# .git/
+# .gitattributes
+# .github/
+# .gitignore
+# .gitmodules
+.next/
+# .npmignore
+# .npmrc
+%ProgramData%/
+expo-env.d.ts
+next-env.d.ts
+
+# Tests
+# __test__/
+# __tests__/
+coverage/
+# example/
+# examples/
+# script/
+# scripts/
+# spec/
+# specs/
+# test/
+# tests/
+# *.spec.*
+# *.test.*
+
+# Ignore
+backup/
+backups/
+bak/
+baks/
+dump/
+dumps/
+temp/
+*.bak.*
+*.old.*
+
+# OS
+.DS_Store
+desktop.ini
+thumbs.db
+
+# Project configs
+# .babelrc
+# .babelrc.*
+# .editorconfig
+# .eslintrc
+# .eslintrc.*
+# .jestrc
+# .jestrc.*
+# .prettierrc
+# .prettierrc.*
+# babel.config.*
+# eslint.config.*
+# jest.config.*
+# metro.config.js
+# prettier.config.*
+# tsconfig.*.json
+# tsconfig.json
+# webpack.*
+# webpack.config.js
+
+# Environments
+# .env*
+.env*.local
+
+# Certificates
+certs/
+keys/
+secrets/
+*.cer
+*.crt
+*.csr
+*.key
+*.p12
+*.pem
+*.pfx
