@@ -1,4 +1,4 @@
-import { Status } from '../const'
+import type { TStatus } from '../types'
 
 interface Body {
 	/**
@@ -38,5 +38,5 @@ interface Head {
 export interface TResponse {
 	body: Body
 	head: Head
-	status: (typeof Status)[keyof typeof Status]
+	status: TStatus
 }
