@@ -69,6 +69,63 @@ yarn add @geisonjr/json-transfer-protocol
 
 ## :book: Documentation
 
+### Configure the `env` file for the client
+
+```.env
+# Host address of the client
+CLIENT_HOST=127.0.0.1
+# Port the client will use
+CLIENT_PORT=6969
+# Indicates if the client uses a secure connection
+CLIENT_SECURE=true
+```
+
+### Configure the `env` file for the server
+
+```.env
+# Host address of the server
+SERVER_HOST=127.0.0.1
+# Port the server will use
+SERVER_PORT=6969
+# Indicates if the server uses SSL for secure connections
+SERVER_SECURE=true
+# Path to the server SSL certificate
+SERVER_CERT=/certs/cert.pem
+# Path to the server SSL key
+SERVER_KEY=/certs/key.pem
+# Path to the Certificate Authority (CA) certificate
+SERVER_CA=/certs/ca.pem
+```
+
+### Configure the `env` file for the logger
+
+```.env
+# Directory where logs will be stored
+LOG_DIR=./logs
+# Enables or disables logging
+LOG=false
+# Maximum size of the log file
+LOG_MAX=1000000
+# Defines if logs will be displayed in the console
+LOG_CONSOLE=true
+# Defines if logs will be formatted as JSON
+LOG_JSON=false
+# Defines if logs will be formatted as text
+LOG_LOG=false
+# Enables or disables DEBUG log level
+LOG_DEBUG=true
+# Enables or disables INFO log level
+LOG_INFO=true
+# Enables or disables WARN log level
+LOG_WARN=true
+# Enables or disables ERROR log level
+LOG_ERROR=true
+# Enables or disables FATAL log level
+LOG_FATAL=true
+# Enables or disables TRACE log level
+LOG_TRACE=true
+```
+
 ### Create a server
 
 ```typescript
