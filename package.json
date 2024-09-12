@@ -15,6 +15,9 @@
 		"url": "https://github.com/GeisonJr/json-transfer-protocol/issues"
 	},
 	"scripts": {
+		"build": "npm run scripts:clean && npm run build:tsc",
+		"build:tsc": "tsc -p ./tsconfig.json",
+		"prepack": "npm run build",
 		"scripts:clean": "node ./scripts/clean.js"
 	},
 	"dependencies": {
@@ -25,6 +28,11 @@
 		"@types/node": "^22.5.0",
 		"typescript": "^5.3.3"
 	},
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"files": [
+		"lib"
+	],
 	"keywords": [
 		"ip",
 		"json",
