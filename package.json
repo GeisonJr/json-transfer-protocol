@@ -1,5 +1,5 @@
 {
-	"name": "@geisonjr/json-transfer-protocol",
+	"name": "@geisonjr/jason-transfer-protocol",
 	"description": "JTP (JSON Transfer Protocol)",
 	"version": "1.0.0",
 	"private": false,
@@ -14,7 +14,9 @@
 	"bugs": {
 		"url": "https://github.com/GeisonJr/json-transfer-protocol/issues"
 	},
-	"scripts": {},
+	"scripts": {
+		"scripts:clean": "node ./scripts/clean.js"
+	},
 	"dependencies": {
 		"@geisonjr/envfy": "^1.0.1",
 		"@geisonjr/typefy": "^1.0.0"
