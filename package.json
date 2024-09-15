@@ -18,7 +18,10 @@
 		"build": "npm run scripts:clean && npm run build:tsc",
 		"build:tsc": "tsc -p ./tsconfig.json",
 		"prepack": "npm run build",
-		"scripts:clean": "node ./scripts/clean.js"
+		"scripts:clean": "node ./scripts/clean.js",
+		"test": "ts-node ./tests/index.ts",
+		"test:http": "ts-node ./tests/http.ts",
+		"test:jtp": "ts-node ./tests/jtp.ts"
 	},
 	"dependencies": {
 		"@geisonjr/envfy": "^1.0.1",
@@ -26,6 +29,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^22.5.0",
+		"ts-node": "^10.9.2",
 		"typescript": "^5.3.3"
 	},
 	"main": "lib/index.js",
