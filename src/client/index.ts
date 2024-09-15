@@ -1,4 +1,5 @@
 import * as envfy from '@geisonjr/envfy'
+import { isUndefined } from '@geisonjr/typefy'
 import * as net from 'node:net'
 import * as tls from 'node:tls'
 import { Status } from '../const'
@@ -13,25 +14,27 @@ import type { ClientEvents, ClientOptions, Error, SocketClient, Success } from '
  * Class to create a Client
  */
 export class Client<T extends ClientEvents> extends Events<T> {
-	protected readonly id: string
-	protected readonly log: Log
+	public readonly id: string
+	public readonly log: Log
+	public options!: Required<ClientOptions>
 	public socket!: SocketClient
 
-	constructor(protected options = {} as ClientOptions) {
+	constructor(options: ClientOptions = {}) {
 		super()
 		this.id = uuid()
 		this.log = new Log(this.id)
 
-		this.setupDefaultOptions()
+		this.setupDefaultOptions(options)
 		this.setupClient()
 		this.setupEvents()
 	}
 
-	private setupDefaultOptions(): void {
-		const { options } = this
-		options.secure ??= envfy.boolean('CLIENT_SECURE', true)
-		options.host ??= envfy.string('CLIENT_HOST', '127.0.0.1')
-		options.port ??= envfy.number('CLIENT_PORT', 6969) // 9669
+	private setupDefaultOptions(options: ClientOptions): void {
+		this.options = {
+			secure: options.secure ?? envfy.boolean('CLIENT_SECURE', true),
+			host: options.host ?? envfy.string('CLIENT_HOST', '127.0.0.1'),
+			port: options.port ?? envfy.number('CLIENT_PORT', 6969) // 9669
+		}
 	}
 
 	private setupClient(): void {
@@ -107,15 +110,43 @@ export function createClient(options?: ClientOptions) {
 /**
  * Fetch data from a server
  */
-export function fetcher<T>(data: TRequest, options?: ClientOptions) {
-	return new Promise<Success<T> | Error>((resolve) => {
+export function fetcher<S = any>(data: TRequest, options?: ClientOptions) {
+	return new Promise<Success<S> | Error<string>>((resolve) => {
 
 		const client = new Client<ClientEvents>(options)
 
-		client.socket.on('error', () => {
+		client.socket.on('error', (err) => {
+			// @ts-ignore
+			if (!isUndefined(err.code)) {
+				resolve({
+					success: false,
+					status: {
+						...Status.INTERNAL_CLIENT_ERROR,
+						// @ts-ignore
+						code: err.code,
+						message: err.message
+					},
+					head: {
+						host: options?.host ?? ''
+					},
+					body: {
+						type: 'string',
+						data: 'Failed to fetch'
+					}
+				})
+				return
+			}
+
 			resolve({
 				success: false,
-				data: Status.INTERNAL_CLIENT_ERROR
+				status: Status.INTERNAL_CLIENT_ERROR,
+				head: {
+					host: ''
+				},
+				body: {
+					type: 'string',
+					data: 'Failed to fetch'
+				}
 			})
 		})
 
@@ -124,9 +155,21 @@ export function fetcher<T>(data: TRequest, options?: ClientOptions) {
 		})
 
 		client.on('receive', (data) => {
+			if (data.status.code === Status.OK.code) {
+				resolve({
+					success: true,
+					status: data.status,
+					head: data.head,
+					body: data.body
+				})
+				return
+			}
+
 			resolve({
-				success: true,
-				data: data as T
+				success: false,
+				status: data.status,
+				head: data.head,
+				body: data.body
 			})
 		})
 	})

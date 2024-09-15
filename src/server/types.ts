@@ -10,32 +10,32 @@ export interface ServerOptions {
 	 * The host to bind the server to
 	 * @example '127.0.0.1'
 	 */
-	host: string
+	host?: string
 	/**
 	 * The port to bind the server to
 	 * @example 8080
 	 */
-	port: number
+	port?: number
 	/**
 	 * Whether to use TLS
 	 * @default true
 	 */
-	secure: boolean
+	secure?: boolean
 	/**
 	 * Path to the certificate file
 	 * @example '/path/to/cert.pem'
 	 */
-	cert: string
+	cert?: string
 	/**
 	 * Path to the key file
 	 * @example '/path/to/key.pem'
 	 */
-	key: string
+	key?: string
 	/**
 	 * Path to the CA file
 	 * @example '/path/to/ca.pem'
 	 */
-	ca: string
+	ca?: string
 }
 
 export type SocketServer = net.Server | tls.Server
