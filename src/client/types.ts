@@ -1,6 +1,6 @@
 import * as net from 'node:net'
 import * as tls from 'node:tls'
-import type { TResponse } from '../response/types'
+import type { Body, Head, TResponse } from '../response/types'
 import type { TStatus } from '../types'
 
 export interface ClientEvents {
@@ -14,27 +14,31 @@ export interface ClientOptions {
 	 * The host to connect to
 	 * @example '127.0.0.1'
 	 */
-	host: string
+	host?: string
 	/**
 	 * The port to connect to
 	 * @example 6969
 	 */
-	port: number
+	port?: number
 	/**
 	 * Whether to use TLS
 	 * @default true
 	 */
-	secure: boolean
+	secure?: boolean
 }
 
 export type SocketClient = net.Socket | tls.TLSSocket
 
-export interface Error {
+export interface Error<T = any> {
 	success: false
-	data: TStatus
+	body: Body<T>
+	head: Head
+	status: TStatus
 }
 
-export interface Success<T> {
+export interface Success<T = any> {
 	success: true
-	data: T
+	body: Body<T>
+	head: Head
+	status: TStatus
 }

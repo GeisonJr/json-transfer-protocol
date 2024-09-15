@@ -21,27 +21,29 @@ export class Server<T extends ServerEvents> extends Events<T> {
   public readonly id: string
   public readonly log: Log
   public readonly router: Router
+  public options!: Required<ServerOptions>
   public socket!: SocketServer
 
-  constructor(protected options = {} as ServerOptions) {
+  constructor(options: ServerOptions = {}) {
     super()
     this.id = uuid()
     this.log = new Log(this.id)
     this.router = new Router()
 
-    this.setupDefaultOptions()
+    this.setupDefaultOptions(options)
     this.setupServer()
     this.setupEvents()
   }
 
-  private setupDefaultOptions(): void {
-    const { options } = this
-    options.secure ??= envfy.boolean('SERVER_SECURE', true)
-    options.host ??= envfy.string('SERVER_HOST', '127.0.0.1')
-    options.port ??= envfy.number('SERVER_PORT', 6969) // 9669
-    options.cert ??= envfy.string('SERVER_CERT')
-    options.key ??= envfy.string('SERVER_KEY')
-    options.ca ??= envfy.string('SERVER_CA')
+  private setupDefaultOptions(options: ServerOptions): void {
+    this.options = {
+      secure: options.secure ?? envfy.boolean('SERVER_SECURE', true),
+      host: options.host ?? envfy.string('SERVER_HOST', '127.0.0.1'),
+      port: options.port ?? envfy.number('SERVER_PORT', 6969), // 9669
+      cert: options.cert ?? envfy.string('SERVER_CERT'),
+      key: options.key ?? envfy.string('SERVER_KEY'),
+      ca: options.ca ?? envfy.string('SERVER_CA')
+    }
   }
 
   private setupServer(): void {

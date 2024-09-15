@@ -1,6 +1,6 @@
 import type { TStatus } from '../types'
 
-interface Body {
+export interface Body<T = any> {
 	/**
 	 * Data type of the body
 	 * @default 'null'
@@ -11,7 +11,20 @@ interface Body {
 	 * @example 'object'
 	 * @example 'string'
 	 */
-	type: 'array' | 'boolean' | 'null' | 'number' | 'object' | 'string'
+	type:
+	T extends null
+	? 'null'
+	: T extends boolean
+	? 'boolean'
+	: T extends number
+	? 'number'
+	: T extends string
+	? 'string'
+	: T extends Array<any>
+	? 'array'
+	: T extends object
+	? 'object'
+	: 'null'
 	/**
 	 * The data of the body
 	 * @default null
@@ -22,10 +35,10 @@ interface Body {
 	 * @example { hello: 'world' }
 	 * @example 'Hello, World!' or '2021-01-01T00:00:00.000Z'
 	 */
-	data: any
+	data: T
 }
 
-interface Head {
+export interface Head {
 	[key: string]: string
 	/**
 	 * The domain name or IP address of the server.
